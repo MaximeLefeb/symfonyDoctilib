@@ -81,6 +81,9 @@
     "egulias/email-validator": {
         "version": "2.1.24"
     },
+    "liip/test-fixtures-bundle": {
+        "version": "1.11.0"
+    },
     "monolog/monolog": {
         "version": "2.2.0"
     },
