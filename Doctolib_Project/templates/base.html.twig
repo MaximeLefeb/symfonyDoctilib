@@ -30,7 +30,8 @@
                 
                 {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
                     <a class="btn btn-outline-info my-2 my-sm-0" href="http://localhost:8000/login">Se connecter</a>
-                    <a class="btn btn-outline-info my-2 my-sm-0 ml-2" href="http://localhost:8000/AddPatient">Créer un compte</a>
+                    <a class="btn btn-outline-info my-2 my-sm-0 ml-2" href="http://localhost:8000/AddPatient">Créer un compte patient</a>
+                    <a class="btn btn-outline-info my-2 my-sm-0 ml-2" href="http://localhost:8000/AddPraticien">Créer un compte praticien</a>
                 {% else %}
                     <a class="btn btn-outline-info my-2 my-sm-0" href="http://localhost:8000/logout">Se Déconnecter</a>
                 {% endif %}
