@@ -3,8 +3,8 @@
 namespace App\Repository;
 
 use App\Entity\Rdv;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @method Rdv|null find($id, $lockMode = null, $lockVersion = null)

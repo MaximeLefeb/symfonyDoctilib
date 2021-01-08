@@ -11,10 +11,8 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
-class PraticienType extends AbstractType
-{
-    public function buildForm(FormBuilderInterface $builder, array $options)
-    {
+class PraticienType extends AbstractType {
+    public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
             ->add('prenom', TextType      ::class, ['label' => false, 'attr' => ['placeholder' => 'Prenom'      , 'class' => 'form-control mt-5']])
             ->add('nom', TextType         ::class, ['label' => false, 'attr' => ['placeholder' => 'Nom'         , 'class' => 'form-control mt-5']])

@@ -7,6 +7,7 @@ use App\Entity\Praticien;
 use App\Form\PatientType;
 use App\Form\PraticienType;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\DBAL\Exception\DriverException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -52,7 +53,7 @@ class MainController extends AbstractController {
                     'main'
                 );
 
-            } catch (ServiceException $e) {
+            } catch (DriverException $e) {
                 return $this->render('main/index.html.twig', [
                     'error' => $e->getMessage(),
                 ]);
@@ -91,7 +92,7 @@ class MainController extends AbstractController {
                     $authenticator,
                     'main'
                 );
-            } catch (ServiceException $e) {
+            } catch (DriverException $e) {
                 return $this->render('main/index.html.twig', [
                     'error' => $e->getMessage(),
                 ]);

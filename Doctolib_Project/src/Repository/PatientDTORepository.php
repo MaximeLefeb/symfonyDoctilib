@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\Praticien;
-use Doctrine\Persistence\ManagerRegistry;
+use App\Entity\PatientDTO;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method Praticien|null find($id, $lockMode = null, $lockVersion = null)
- * @method Praticien|null findOneBy(array $criteria, array $orderBy = null)
- * @method Praticien[]    findAll()
- * @method Praticien[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method PatientDTO|null find($id, $lockMode = null, $lockVersion = null)
+ * @method PatientDTO|null findOneBy(array $criteria, array $orderBy = null)
+ * @method PatientDTO[]    findAll()
+ * @method PatientDTO[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class PraticienRepository extends ServiceEntityRepository
+class PatientDTORepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Praticien::class);
+        parent::__construct($registry, PatientDTO::class);
     }
 
     // /**
-    //  * @return Praticien[] Returns an array of Praticien objects
+    //  * @return PatientDTO[] Returns an array of PatientDTO objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class PraticienRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Praticien
+    public function findOneBySomeField($value): ?PatientDTO
     {
         return $this->createQueryBuilder('p')
             ->andWhere('p.exampleField = :val')
