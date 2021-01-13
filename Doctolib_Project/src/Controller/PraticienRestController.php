@@ -20,13 +20,20 @@ use FOS\RestBundle\Controller\AbstractFOSRestController;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
+/**
+ * @OA\Info(
+ *      title="Praticien Management",
+ *      description="Praticien manager (GET,PUT,DELETE,POST)",
+ *      version="0.01",
+ * )
+ */
 class PraticienRestController extends AbstractFOSRestController {
     private $praticienService;
     private $entityManager;
     private $mapper;
 
-    const URI_Praticien_COLLECTION = "/praticiens";
-    const URI_Praticien_INSTANCE = "/praticien/{id}";
+    const URI_PRATICIEN_COLLECTION = "/praticiens";
+    const URI_PRATICIEN_INSTANCE = "/praticien/{id}";
 
     public function __construct(PraticienService $praticienService, EntityManagerInterface $entityManager, PraticienMapper $mapper) {
         $this->praticienService = $praticienService ;
@@ -35,7 +42,26 @@ class PraticienRestController extends AbstractFOSRestController {
     }
 
     /**
-     * @Get(PraticienRestController::URI_Praticien_COLLECTION)
+     * @OA\Get(
+     *     path="/praticiens",
+     *     tags={"Praticien"},
+     *     summary="Returns a list of PraticienDTO",
+     *     description="Returns a list of PraticienDTO",
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful operation", 
+     *         @OA\JsonContent(ref="#/components/schemas/PatientDTO")   
+     *     ),
+     *      @OA\Response(
+     *         response=404,
+     *         description="If no PraticienDTO found",    
+     *     ),
+     *      @OA\Response(
+     *         response=500,
+     *         description="Internal server Error. Please contact us",    
+     *     )
+     * ) 
+     * @Get(PraticienRestController::URI_PRATICIEN_COLLECTION)
      */
     public function searchAll() {
         try {
@@ -52,7 +78,54 @@ class PraticienRestController extends AbstractFOSRestController {
     }
 
     /**
-     * @Post(PraticienRestController::URI_Praticien_COLLECTION)
+     * @OA\Post(
+     *     path="/praticiens",
+     *     tags={"Praticien"},
+     *     summary="Add a new PraticienDTO",
+     *     description="Create a object of type PraticienDTO",
+     *     @OA\RequestBody(
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(
+     *                  @OA\Property(
+     *                      property="email",
+     *                      type="string"
+     *                  ),
+     *                  @OA\Property(
+     *                      property="nom",
+     *                      type="string"
+     *                  ),
+     *                  @OA\Property(
+     *                      property="prenom",
+     *                      type="string"
+     *                  ),
+     *                  @OA\Property(
+     *                      property="specialite",
+     *                      type="string"
+     *                  ),
+     *                  @OA\Property(
+     *                      property="password",
+     *                      type="string"
+     *                  ),
+     *                  example={"email": "exemple@gmail.com", "nom": "nomExemple", "prenom": "prenomExemple", "age": 0, "password": "pwdExemple"}
+     *              )
+     *          )
+     *     ),
+     *     @OA\Response(
+     *         response=405,
+     *         description="Invalid request body"
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="Successfully created", 
+     *         @OA\JsonContent(ref="#/components/schemas/PraticienDTO")   
+     *     ),
+     *      @OA\Response(
+     *         response=500,
+     *         description="Internal server Error. Please contact us",    
+     *     )
+     * )  
+     * @Post(PraticienRestController::URI_PRATICIEN_COLLECTION)
      * @ParamConverter("praticienDTO", converter="fos_rest.request_body")
      * @return void
      */
@@ -67,7 +140,60 @@ class PraticienRestController extends AbstractFOSRestController {
     }
 
     /**
-     * @Put(PraticienRestController::URI_Praticien_INSTANCE)
+     * @OA\Put(
+     *     path="/praticien/{id}",
+     *     tags={"Praticien"},
+     *     summary="Modify a PraticienDTO",
+     *     description="Modify a object of type PraticienDTO",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(type="number")
+     *     ),
+     *     @OA\RequestBody(
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(
+     *                  @OA\Property(
+     *                      property="email",
+     *                      type="string"
+     *                  ),
+     *                  @OA\Property(
+     *                      property="nom",
+     *                      type="string"
+     *                  ),
+     *                  @OA\Property(
+     *                      property="prenom",
+     *                      type="string"
+     *                  ),
+     *                  @OA\Property(
+     *                      property="specialite",
+     *                      type="string"
+     *                  ),
+     *                  @OA\Property(
+     *                      property="password",
+     *                      type="string"
+     *                  ),
+     *                  example={"email": "exemple@gmail.com", "nom": "nomExemple", "prenom": "prenomExemple", "age": 0, "password": "pwdExemple"}
+     *              )
+     *          )
+     *     ),
+     *     @OA\Response(
+     *         response=405,
+     *         description="Invalid input"
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successfully modified", 
+     *         @OA\JsonContent(ref="#/components/schemas/PraticienDTO")   
+     *     ),
+     *      @OA\Response(
+     *         response=500,
+     *         description="Internal server Error. Please contact us",    
+     *     )
+     * ) 
+     * @Put(PraticienRestController::URI_PRATICIEN_INSTANCE)
      * @ParamConverter("praticienDTO", converter="fos_rest.request_body")
      * @param PraticienDTO $praticienDTO
      * @return void
@@ -82,7 +208,27 @@ class PraticienRestController extends AbstractFOSRestController {
     }
 
     /** 
-     * @Delete(PraticienRestController::URI_Praticien_INSTANCE)
+     * @OA\Delete(
+     *     path="/praticien/{id}",
+     *     tags={"Praticien"},
+     *     summary="Delete a Praticien",
+     *     description="Delete a object of type Praticien",
+     *     @OA\Parameter(
+     *          name="id",
+     *          in="path",
+     *          required=true,
+     *          @OA\Schema(type="number")
+     *     ),
+     *     @OA\Response(
+     *         response=204,
+     *         description="Successfully deleted"
+     *     ),
+     *      @OA\Response(
+     *         response=500,
+     *         description="Internal server Error. Please contact us",    
+     *     )
+     * )  
+     * @Delete(PraticienRestController::URI_PRATICIEN_INSTANCE)
      * @param [type] $id
      * @return void
      */
@@ -96,7 +242,32 @@ class PraticienRestController extends AbstractFOSRestController {
     }
 
     /**
-     * @Get(PraticienRestController::URI_Praticien_INSTANCE)
+     * @OA\Get(
+     *   path="/praticien/{id}",
+     *   tags={"Praticien"},
+     *   summary="Return information about a Praticien",
+     *   description="Return information about a Praticien",
+     *   @OA\Parameter(
+     *     name="id",
+     *     in="path",
+     *     required=true,
+     *     @OA\Schema(type="number")
+     *   ),
+     *   @OA\Response(
+     *     response="200",
+     *     description="The praticien",
+     *     @OA\JsonContent(ref="#/components/schemas/PraticienDTO")
+     *   ),
+     *   @OA\Response(
+     *     response="500",
+     *     description="Internal server Error. Please contact us",
+     *   ),
+     *   @OA\Response(
+     *     response="404",
+     *     description="No user found for this id",
+     *   )
+     * ) 
+     * @Get(PraticienRestController::URI_PRATICIEN_INSTANCE)
      * @return void
      */
     public function searchById(Int $id) {

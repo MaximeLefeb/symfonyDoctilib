@@ -6,6 +6,7 @@ use App\DTO\PatientDTO;
 use App\Entity\Patient;
 use App\Mapper\PatientMapper;
 use FOS\RestBundle\View\View;
+use OpenApi\Annotations as OA;
 use App\Service\PatientService;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Controller\PatientRestController;
@@ -20,6 +21,13 @@ use FOS\RestBundle\Controller\AbstractFOSRestController;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
+/**
+ * @OA\Info(
+ *      title="Patient Management",
+ *      description="Patient manager (GET,PUT,DELETE,POST)",
+ *      version="0.01",
+ * )
+ */
 class PatientRestController extends AbstractFOSRestController {
     private $patientService;
     private $entityManager;
@@ -35,6 +43,25 @@ class PatientRestController extends AbstractFOSRestController {
     }
 
     /**
+     * @OA\Get(
+     *     path="/patients",
+     *     tags={"Patient"},
+     *     summary="Returns a list of PatientDTO",
+     *     description="Returns a list of PatientDTO",
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful operation", 
+     *         @OA\JsonContent(ref="#/components/schemas/PatientDTO")   
+     *     ),
+     *      @OA\Response(
+     *         response=404,
+     *         description="If no PatientDTO found",    
+     *     ),
+     *      @OA\Response(
+     *         response=500,
+     *         description="Internal server Error. Please contact us",    
+     *     )
+     * )
      * @Get(PatientRestController::URI_PATIENT_COLLECTION)
      */
     public function searchAll() {
@@ -52,6 +79,53 @@ class PatientRestController extends AbstractFOSRestController {
     }
 
     /**
+     * @OA\Post(
+     *     path="/patients",
+     *     tags={"Patient"},
+     *     summary="Add a new PatientDTO",
+     *     description="Create a object of type PatientDTO",
+     *     @OA\RequestBody(
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(
+     *                  @OA\Property(
+     *                      property="email",
+     *                      type="string"
+     *                  ),
+     *                  @OA\Property(
+     *                      property="nom",
+     *                      type="string"
+     *                  ),
+     *                  @OA\Property(
+     *                      property="prenom",
+     *                      type="string"
+     *                  ),
+     *                  @OA\Property(
+     *                      property="age",
+     *                      type="number"
+     *                  ),
+     *                  @OA\Property(
+     *                      property="password",
+     *                      type="string"
+     *                  ),
+     *                  example={"email": "exemple@gmail.com", "nom": "nomExemple", "prenom": "prenomExemple", "age": 0, "password": "pwdExemple"}
+     *              )
+     *          )
+     *     ),
+     *     @OA\Response(
+     *         response=405,
+     *         description="Invalid request body"
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="Successfully created", 
+     *         @OA\JsonContent(ref="#/components/schemas/PatientDTO")   
+     *     ),
+     *      @OA\Response(
+     *         response=500,
+     *         description="Internal server Error. Please contact us",    
+     *     )
+     * ) 
      * @Post(PatientRestController::URI_PATIENT_COLLECTION)
      * @ParamConverter("patientDTO", converter="fos_rest.request_body")
      * @return void
@@ -67,6 +141,59 @@ class PatientRestController extends AbstractFOSRestController {
     }
 
     /**
+     * @OA\Put(
+     *     path="/patient/{id}",
+     *     tags={"Patient"},
+     *     summary="Modify a PatientDTO",
+     *     description="Modify a object of type PatientDTO",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(type="number")
+     *     ),
+     *     @OA\RequestBody(
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(
+     *                  @OA\Property(
+     *                      property="email",
+     *                      type="string"
+     *                  ),
+     *                  @OA\Property(
+     *                      property="nom",
+     *                      type="string"
+     *                  ),
+     *                  @OA\Property(
+     *                      property="prenom",
+     *                      type="string"
+     *                  ),
+     *                  @OA\Property(
+     *                      property="age",
+     *                      type="number"
+     *                  ),
+     *                  @OA\Property(
+     *                      property="password",
+     *                      type="string"
+     *                  ),
+     *                  example={"email": "exemple@gmail.com", "nom": "nomExemple", "prenom": "prenomExemple", "age": 0, "password": "pwdExemple"}
+     *              )
+     *          )
+     *     ),
+     *     @OA\Response(
+     *         response=405,
+     *         description="Invalid input"
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successfully modified", 
+     *         @OA\JsonContent(ref="#/components/schemas/PatientDTO")   
+     *     ),
+     *      @OA\Response(
+     *         response=500,
+     *         description="Internal server Error. Please contact us",    
+     *     )
+     * )  
      * @Put(PatientRestController::URI_PATIENT_INSTANCE)
      * @ParamConverter("patientDTO", converter="fos_rest.request_body")
      * @param PatientDTO $patientDTO
@@ -82,6 +209,26 @@ class PatientRestController extends AbstractFOSRestController {
     }
 
     /** 
+     * @OA\Delete(
+     *     path="/patient/{id}",
+     *     tags={"Patient"},
+     *     summary="Delete a Patient",
+     *     description="Delete a object of type Patient",
+     *     @OA\Parameter(
+     *          name="id",
+     *          in="path",
+     *          required=true,
+     *          @OA\Schema(type="number")
+     *     ),
+     *     @OA\Response(
+     *         response=204,
+     *         description="Successfully deleted"
+     *     ),
+     *      @OA\Response(
+     *         response=500,
+     *         description="Internal server Error. Please contact us",    
+     *     )
+     * ) 
      * @Delete(PatientRestController::URI_PATIENT_INSTANCE)
      * @param [type] $id
      * @return void
@@ -95,7 +242,32 @@ class PatientRestController extends AbstractFOSRestController {
         }
     }
 
-    /**
+    /** 
+     * @OA\Get(
+     *   path="/patient/{id}",
+     *   tags={"Patient"},
+     *   summary="Return information about a Patient",
+     *   description="Return information about a Patient",
+     *   @OA\Parameter(
+     *     name="id",
+     *     in="path",
+     *     required=true,
+     *     @OA\Schema(type="number")
+     *   ),
+     *   @OA\Response(
+     *     response="200",
+     *     description="The praticien",
+     *     @OA\JsonContent(ref="#/components/schemas/PatientDTO")
+     *   ),
+     *   @OA\Response(
+     *     response="500",
+     *     description="Internal server Error. Please contact us",
+     *   ),
+     *   @OA\Response(
+     *     response="404",
+     *     description="No user found for this id",
+     *   )
+     * )
      * @Get(PatientRestController::URI_PATIENT_INSTANCE)
      * @return void
      */

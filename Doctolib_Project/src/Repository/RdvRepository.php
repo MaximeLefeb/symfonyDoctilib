@@ -9,7 +9,7 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 /**
  * @method Rdv|null find($id, $lockMode = null, $lockVersion = null)
  * @method Rdv|null findOneBy(array $criteria, array $orderBy = null)
- * @method Rdv[]    findAll()
+ * @method Rdv[]    findAll
  * @method Rdv[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class RdvRepository extends ServiceEntityRepository

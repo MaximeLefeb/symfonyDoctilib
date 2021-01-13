@@ -3,11 +3,34 @@
 namespace App\DTO;
 
 use App\Entity\User;
+Use OpenApi\Annotations as OA;
 
+/**
+ * @OA\Schema()
+ */
 class PatientDTO extends User{
+    /**
+     * @OA\Property(type="number")
+     * @var int
+     */
     private $id;
+
+    /**
+     * @OA\Property(type="string")
+     * @var string
+     */
     private $nom;
+
+    /**
+     * @OA\Property(type="string")
+     * @var string
+     */
     private $prenom;
+
+    /**
+     * @OA\Property(type="number")
+     * @var int
+     */
     private $age;
 
     public function getId() :?Int {

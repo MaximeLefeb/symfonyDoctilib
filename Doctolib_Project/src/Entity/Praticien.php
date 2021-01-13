@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use App\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\PraticienRepository;
 use Doctrine\Common\Collections\Collection;
@@ -13,13 +12,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass=PraticienRepository::class)
  */
 class Praticien extends User {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private $id;
-
     /**
      * @ORM\Column(type="string", length=100)
      * @Assert\NotBlank
@@ -46,10 +38,6 @@ class Praticien extends User {
     public function __construct()
     {
         $this->rdv = new ArrayCollection();
-    }
-
-    public function getId() :?int {
-        return $this->id;
     }
 
     public function getNom():?string {
@@ -83,7 +71,7 @@ class Praticien extends User {
         return $this->rdv;
     }
 
-    public function addRdv(Rdv $rdv) :self{
+    public function addRdv(Rdv $rdv) :self {
         if (!$this->rdv->contains($rdv)) {
             $this->rdv[] = $rdv;
             $rdv->setPraticien($this);

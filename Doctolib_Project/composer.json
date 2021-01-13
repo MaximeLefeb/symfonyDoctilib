@@ -35,7 +35,8 @@
         "symfony/web-link": "4.4.*",
         "symfony/yaml": "4.4.*",
         "twig/extra-bundle": "^2.12|^3.0",
-        "twig/twig": "^2.12|^3.0"
+        "twig/twig": "^2.12|^3.0",
+        "zircote/swagger-php": "^3.1"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.4",
