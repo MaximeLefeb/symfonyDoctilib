@@ -47,8 +47,8 @@ class RdvDTO {
     public function getDateRdv() :?\DateTimeInterface {
         return $this->dateRdv;
     }
-    public function setDateRdv(?\DateTimeInterface $dateRdv) :self {
-        $this->dateRdv = $dateRdv;
+    public function setDateRdv(?String $dateRdv) :self {
+        $this->dateRdv = new \DateTime($dateRdv);
         return $this;
     }
 

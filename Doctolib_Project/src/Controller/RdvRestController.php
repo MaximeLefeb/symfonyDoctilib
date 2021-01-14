@@ -6,6 +6,7 @@ use App\DTO\RdvDTO;
 use App\Entity\Rdv;
 use App\Mapper\RdvMapper;
 use App\Service\RdvService;
+use OpenApi\Annotations as OA;
 use FOS\RestBundle\View\View;
 use App\Controller\RdvRestController;
 use Doctrine\ORM\EntityManagerInterface;
@@ -90,7 +91,8 @@ class RdvRestController extends AbstractFOSRestController {
      *              @OA\Schema(
      *                  @OA\Property(
      *                      property="dateRdv",
-     *                      type="string"
+     *                      type="string",
+     *                      format="date-time"
      *                  ),
      *                  @OA\Property(
      *                      property="adresse",
@@ -115,7 +117,7 @@ class RdvRestController extends AbstractFOSRestController {
      *     @OA\Response(
      *         response=201,
      *         description="Successfully created", 
-     *         @OA\JsonContent(ref="#/components/schemas/PraticienDTO")   
+     *         @OA\JsonContent(ref="#/components/schemas/RdvDTO")   
      *     ),
      *      @OA\Response(
      *         response=500,

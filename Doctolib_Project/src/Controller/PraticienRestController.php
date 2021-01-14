@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\DTO\PraticienDTO;
 use App\Entity\Praticien;
 use FOS\RestBundle\View\View;
+use OpenApi\Annotations as OA;
 use App\Mapper\PraticienMapper;
 use App\Service\PraticienService;
 use Doctrine\ORM\EntityManagerInterface;
@@ -50,7 +51,7 @@ class PraticienRestController extends AbstractFOSRestController {
      *     @OA\Response(
      *         response=200,
      *         description="Successful operation", 
-     *         @OA\JsonContent(ref="#/components/schemas/PatientDTO")   
+     *         @OA\JsonContent(ref="#/components/schemas/PraticienDTO")   
      *     ),
      *      @OA\Response(
      *         response=404,
@@ -89,6 +90,7 @@ class PraticienRestController extends AbstractFOSRestController {
      *              @OA\Schema(
      *                  @OA\Property(
      *                      property="email",
+     *                      format="email",
      *                      type="string"
      *                  ),
      *                  @OA\Property(
@@ -107,7 +109,7 @@ class PraticienRestController extends AbstractFOSRestController {
      *                      property="password",
      *                      type="string"
      *                  ),
-     *                  example={"email": "exemple@gmail.com", "nom": "nomExemple", "prenom": "prenomExemple", "age": 0, "password": "pwdExemple"}
+     *                  example={"email": "exemple@gmail.com", "nom": "nomExemple", "prenom": "prenomExemple", "specialite": "Neurologie", "password": "pwdExemple"}
      *              )
      *          )
      *     ),
@@ -157,6 +159,7 @@ class PraticienRestController extends AbstractFOSRestController {
      *              @OA\Schema(
      *                  @OA\Property(
      *                      property="email",
+     *                      format="email",
      *                      type="string"
      *                  ),
      *                  @OA\Property(
@@ -175,7 +178,7 @@ class PraticienRestController extends AbstractFOSRestController {
      *                      property="password",
      *                      type="string"
      *                  ),
-     *                  example={"email": "exemple@gmail.com", "nom": "nomExemple", "prenom": "prenomExemple", "age": 0, "password": "pwdExemple"}
+     *                  example={"email": "exemple@gmail.com", "nom": "nomExemple", "prenom": "prenomExemple", "specialite": "Neurologie", "password": "pwdExemple"}
      *              )
      *          )
      *     ),

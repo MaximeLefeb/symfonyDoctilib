@@ -1,8 +1,8 @@
 openapi: 3.0.0
 info:
-  title: 'Patient Management'
-  description: 'Patient manager (GET,PUT,DELETE,POST)'
-  version: '0.01'
+  title: 'Doctolib Management'
+  description: 'Patient, Praticien, Rdv manager (GET,PUT,DELETE,POST,GET{id})'
+  version: '0.03'
 paths:
   /patients:
     get:
@@ -35,6 +35,7 @@ paths:
               properties:
                 email:
                   type: string
+                  format: email
                 nom:
                   type: string
                 prenom:
@@ -106,6 +107,7 @@ paths:
               properties:
                 email:
                   type: string
+                  format: email
                 nom:
                   type: string
                 prenom:
@@ -163,7 +165,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PatientDTO'
+                $ref: '#/components/schemas/PraticienDTO'
         '404':
           description: 'If no PraticienDTO found'
         '500':
@@ -181,6 +183,7 @@ paths:
               properties:
                 email:
                   type: string
+                  format: email
                 nom:
                   type: string
                 prenom:
@@ -194,7 +197,7 @@ paths:
                 email: exemple@gmail.com
                 nom: nomExemple
                 prenom: prenomExemple
-                age: 0
+                specialite: Neurologie
                 password: pwdExemple
       responses:
         '405':
@@ -252,6 +255,7 @@ paths:
               properties:
                 email:
                   type: string
+                  format: email
                 nom:
                   type: string
                 prenom:
@@ -265,7 +269,7 @@ paths:
                 email: exemple@gmail.com
                 nom: nomExemple
                 prenom: prenomExemple
-                age: 0
+                specialite: Neurologie
                 password: pwdExemple
       responses:
         '405':
@@ -327,6 +331,7 @@ paths:
               properties:
                 dateRdv:
                   type: string
+                  format: date-time
                 adresse:
                   type: string
                 patient:
@@ -347,7 +352,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PraticienDTO'
+                $ref: '#/components/schemas/RdvDTO'
         '500':
           description: 'Internal server Error. Please contact us'
   '/rdv/{id}':
@@ -447,8 +452,6 @@ components:
   schemas:
     PatientDTO:
       properties:
-        id:
-          type: number
         nom:
           type: string
         prenom:
@@ -458,8 +461,6 @@ components:
       type: object
     PraticienDTO:
       properties:
-        id:
-          type: number
         nom:
           type: string
         prenom:

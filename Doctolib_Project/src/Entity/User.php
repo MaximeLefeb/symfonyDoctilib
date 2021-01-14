@@ -33,7 +33,7 @@ abstract class User implements UserInterface {
     /**
      * @ORM\Column(type="json")
      */
-    private $roles = [];
+    private $role = [];
 
     /**
      * @var string The hashed password

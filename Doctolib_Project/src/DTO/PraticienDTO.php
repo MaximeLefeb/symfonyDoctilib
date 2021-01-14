@@ -10,12 +10,6 @@ Use OpenApi\Annotations as OA;
  */
 class PraticienDTO extends User {
     /**
-     * @OA\Property(type="number")
-     * @var int
-     */
-    private $id;
-
-    /**
      * @OA\Property(type="string")
      * @var string
      */
@@ -32,10 +26,6 @@ class PraticienDTO extends User {
      * @var string
      */
     private $specialite;
-
-    public function getId() :?int {
-        return $this->id;
-    }
 
     public function getNom() :?string {
         return $this->nom;

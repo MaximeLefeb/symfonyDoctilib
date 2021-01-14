@@ -35,8 +35,7 @@ class Praticien extends User {
      */
     private $rdv;
 
-    public function __construct()
-    {
+    public function __construct() {
         $this->rdv = new ArrayCollection();
     }
 

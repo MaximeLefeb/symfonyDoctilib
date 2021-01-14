@@ -10,12 +10,6 @@ Use OpenApi\Annotations as OA;
  */
 class PatientDTO extends User{
     /**
-     * @OA\Property(type="number")
-     * @var int
-     */
-    private $id;
-
-    /**
      * @OA\Property(type="string")
      * @var string
      */
@@ -32,10 +26,6 @@ class PatientDTO extends User{
      * @var int
      */
     private $age;
-
-    public function getId() :?Int {
-        return $this->id;
-    }
 
     public function getNom() :?string {
         return $this->nom;

@@ -23,9 +23,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 /**
  * @OA\Info(
- *      title="Patient Management",
- *      description="Patient manager (GET,PUT,DELETE,POST)",
- *      version="0.01",
+ *      title="Doctolib Management",
+ *      description="Patient, Praticien, Rdv manager (GET,PUT,DELETE,POST,GET{id})",
+ *      version="0.03",
  * )
  */
 class PatientRestController extends AbstractFOSRestController {
@@ -90,6 +90,7 @@ class PatientRestController extends AbstractFOSRestController {
      *              @OA\Schema(
      *                  @OA\Property(
      *                      property="email",
+     *                      format="email",
      *                      type="string"
      *                  ),
      *                  @OA\Property(
@@ -158,6 +159,7 @@ class PatientRestController extends AbstractFOSRestController {
      *              @OA\Schema(
      *                  @OA\Property(
      *                      property="email",
+     *                      format="email",
      *                      type="string"
      *                  ),
      *                  @OA\Property(
